@@ -2,6 +2,7 @@ from pyvis.network import Network
 import os, json, webbrowser
 import pandas as pd
 import formats
+import utils
 
 def makeCollapsibleTree(df):
     return _makeTree("collapsible-tree", df)
