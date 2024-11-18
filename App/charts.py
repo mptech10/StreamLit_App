@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.graph_objects as go
+import utils
 
 
 # see https://plotly.com/python/treemaps/
