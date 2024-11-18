@@ -1,6 +1,5 @@
-from pyvis.network import Network
-import os, json, webbrowser
-import pandas as pd
+#from pyvis.network import Network
+import os, json
 import formats
 import utils
 
@@ -18,9 +17,10 @@ def _makeTree(template, df):
     root = formats.getJson(df)
 
     # create HTML file from template customized with our JSON
-    with open(f"animated/templates/{template}.html", "r") as file:
+    with open(utils.getFullPath(f"animated/templates/{template}.html"), "r") as file:
         content = file.read()
-    filename = f'animated/{template}.html'
+        
+    filename = utils.getFullPath(f'animated/{template}.html')
     with open(filename, "w") as file:
         file.write(content.replace('"{{data}}"', json.dumps(root, indent=4)))
     return os.path.abspath(filename)
@@ -30,11 +30,11 @@ def makeRadialDendrogram(df):
     path = formats.getPath(formats.getJson(df), [])
 
     # create HTML file from template customized with our JSON array
-    with open(f"animated/templates/radial-dendrogram.html", "r") as file:
+    with open(utils.getFullPath("animated/templates/radial-dendrogram.html"), "r") as file:
         content = file.read()
     content = content.replace('"{{data}}"', json.dumps(path, indent=2))
 
-    filename = os.path.abspath('animated/radial-dendrogram.html')
+    filename = utils.getFullPath("animated/radial-dendrogram.html")
     with open(filename, "w") as file:
         file.write(content)
     return filename
@@ -62,30 +62,6 @@ def makeNetworkGraph(df):
     for node in data.nodes:
         node["value"] = len(map[node["id"]])
 
-    filename = f'animated/network-graph.html'
+    filename = utils.getFullPath("animated/network-graph.html")
     data.show(filename)
     return os.path.abspath(filename)
-
-
-filename = utils.getFullPath("data/employee-manager.csv")
-df = pd.read_csv(filename, header=0).convert_dtypes()
-
-filename = makeCollapsibleTree(df)
-print('Generated Collapsible Tree')
-webbrowser.open(filename)
-
-filename = makeLinearDendrogram(df)
-print('Generated Linear Dendrogram')
-webbrowser.open(filename)
-
-filename = makeRadialDendrogram(df)
-print('Generated Radial Dendrogram')
-webbrowser.open(filename)
-
-filename = makeNetworkGraph(df)
-print('Generated Network Chart')
-webbrowser.open(filename)
-
-filename = makeCircularPacking(df)
-print('Generated Circular Packing')
-webbrowser.open(filename)
