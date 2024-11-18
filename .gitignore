@@ -1,0 +1,7 @@
+build/
+* .spec
+profiles_db.conf
+venv/
+**/lib/
+**.ipynb_checkpoints
+**__pycache__

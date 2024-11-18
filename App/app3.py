@@ -5,6 +5,7 @@ import streamlit.components.v1 as components
 import pandas as pd
 import graphs, formats, charts, animated
 import json
+import utils
 
 
 st.set_page_config(layout="wide")
@@ -20,7 +21,9 @@ with st.sidebar:
     uploaded_file = st.file_uploader(
         "Upload a CSV file", type = ["csv"], accept_multiple_files = False)
 
-    filename = "data/employee-manager.csv"
+    path = os.path.dirname(__file__)
+    filenmae = utils.getFullPath("data/employee-manager.csv")
+    #filename = "data/employee-manager.csv"
     if uploaded_file is not None:
         filename = StringIO(uploaded_file.getvalue().decode("utf-8"))
         
