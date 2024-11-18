@@ -67,7 +67,7 @@ def makeNetworkGraph(df):
 
 
 filename = utils.getFullPath("data/employee-manager.csv")
-df = pd.read_csv(filename), header=0).convert_dtypes()
+df = pd.read_csv(filename, header=0).convert_dtypes()
 
 filename = makeCollapsibleTree(df)
 print('Generated Collapsible Tree')
