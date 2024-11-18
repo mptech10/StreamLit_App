@@ -123,26 +123,30 @@ df = pd.read_csv(filename, header=0).convert_dtypes()
 # convert and save as JSON
 # validate at https://jsonlint.com/
 root = getJson(df)
-with open("data/employee-manager.json", "w") as f:
+filename = utils.getFullPath("data/employee-manager.json")
+with open(filename, "w") as f:
     f.writelines(json.dumps(root, indent=len(indent)))
 print('Generated "data/employee-manager.json" file')
 
 # convert and save as XML
 # validate at https://www.liquid-technologies.com/online-xml-validator
 xml = getXml(root)
-with open("data/employee-manager.xml", "w") as f:
+filename = utils.getFullPath("data/employee-manager.xml")
+with open(filename, "w") as f:
     f.writelines(xml)
 print('Generated "data/employee-manager.xml" file')
 
 # convert and save as YAML
 # validate at https://www.yamllint.com/
 yaml = getYaml(root)
-with open("data/employee-manager.yaml", "w") as f:
+filename = utils.getFullPath("data/employee-manager.yaml")
+with open(filename, "w") as f:
     f.writelines(yaml)
 print('Generated "data/employee-manager.yaml" file')
 
 # get path for each node
 path = getPath(root, [])
-with open("data/employee-manager-path.json", "w") as f:
+filename = utils.getFullPath("data/employee-manager-path.json")
+with open(filename, "w") as f:
     f.writelines(json.dumps(path, indent=len(indent)))
 print('Generated "data/employee-manager-path.json" file')
