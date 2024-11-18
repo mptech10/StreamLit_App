@@ -114,7 +114,8 @@ def getPath(node, nodes, path=""):
 
 
 # validate at https://toolkitbay.com/tkb/tool/csv-validator
-df = pd.read_csv("data/employee-manager.csv", header=0).convert_dtypes()
+filename = utils.getFullPath("data/employee-manager.csv")
+df = pd.read_csv(filename, header=0).convert_dtypes()
 
 # convert and save as JSON
 # validate at https://jsonlint.com/
